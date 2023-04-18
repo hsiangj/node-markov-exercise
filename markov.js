@@ -19,7 +19,7 @@ class MarkovMachine {
   makeChains() {
     // TODO
     let result = {};
-    let strArr = words.split(' ');
+    let strArr = this.words.split(' ');
 
     for (let word = 0; word< strArr.length; word++){
       if (!result[strArr[word]]){
@@ -38,6 +38,7 @@ class MarkovMachine {
       }
     }
     return result;
+    
   }
 
   
@@ -45,7 +46,30 @@ class MarkovMachine {
 
   /** return random text from chains */
 
-  makeText(numWords = 100) {
+  makeText(numWords = 10) {
     // TODO
+    let output = [];
+    let keys = Object.keys(this.result)
+    
+    let key = this.getRandomChoice(keys);
+    let obj = this.result;
+
+    while (output.length < numWords && key !== null){
+      output.push(key);
+      key = this.getRandomChoice(obj[key])
+    }
+    return output.join(' ');
   }
+ 
+  
+
+
+  getRandomChoice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+ 
+
 }
+
+
