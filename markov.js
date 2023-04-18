@@ -18,7 +18,29 @@ class MarkovMachine {
 
   makeChains() {
     // TODO
+    let result = {};
+    let strArr = words.split(' ');
+
+    for (let word = 0; word< strArr.length; word++){
+      if (!result[strArr[word]]){
+        result[strArr[word]] = [];
+        if (strArr[word+1] === undefined){
+          result[strArr[word]].push(null)
+        }else {
+          result[strArr[word]].push(strArr[word+1]);
+        } 
+      } else {
+        if (strArr[word+1] === undefined){
+          result[strArr[word]].push(null)
+        }else {
+          result[strArr[word]].push(strArr[word+1]);
+        }
+      }
+    }
+    return result;
   }
+
+  
 
 
   /** return random text from chains */
