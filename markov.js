@@ -19,38 +19,37 @@ class MarkovMachine {
   makeChains() {
     // TODO
     let result = {};
-    let strArr = this.words.split(' ');
-
-    for (let word = 0; word< strArr.length; word++){
-      if (!result[strArr[word]]){
-        result[strArr[word]] = [];
-        if (strArr[word+1] === undefined){
-          result[strArr[word]].push(null)
+    
+    for (let i = 0; i< this.words.length; i++){
+      let word = this.words[i];
+      
+      if (!result[word]){
+        result[word] = [];
+        if (this.words[i+1] === undefined){
+          result[word].push(null)
         }else {
-          result[strArr[word]].push(strArr[word+1]);
+          result[word].push(this.words[i+1]);
         } 
       } else {
-        if (strArr[word+1] === undefined){
-          result[strArr[word]].push(null)
+        if (this.words[i+1] === undefined){
+          result[word].push(null)
         }else {
-          result[strArr[word]].push(strArr[word+1]);
+          result[word].push(this.words[i+1]);
         }
       }
     }
-    return result;
+    return this.result = result;
     
   }
 
-  
 
 
   /** return random text from chains */
 
-  makeText(numWords = 10) {
+  makeText(numWords = 100) {
     // TODO
     let output = [];
     let keys = Object.keys(this.result)
-    
     let key = this.getRandomChoice(keys);
     let obj = this.result;
 
@@ -61,15 +60,14 @@ class MarkovMachine {
     return output.join(' ');
   }
  
-  
 
 
   getRandomChoice(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
- 
-
 }
 
-
+module.exports = {
+  MarkovMachine,
+};
