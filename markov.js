@@ -50,19 +50,19 @@ class MarkovMachine {
     // TODO
     let output = [];
     let keys = Object.keys(this.result)
-    let key = this.getRandomChoice(keys);
+    let key = MarkovMachine.getRandomChoice(keys);
     let obj = this.result;
 
     while (output.length < numWords && key !== null){
       output.push(key);
-      key = this.getRandomChoice(obj[key])
+      key = MarkovMachine.getRandomChoice(obj[key])
     }
     return output.join(' ');
   }
  
 
 
-  getRandomChoice(arr) {
+  static getRandomChoice(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
